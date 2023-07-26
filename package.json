@@ -1,0 +1,22 @@
+{
+  "name": "homeloancalc",
+  "version": "1.0.0",
+  "description": "Homeloancalc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielng19971/HomeLoanCalc.git"
+  },
+  "author": "Tung Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielng19971/HomeLoanCalc/issues"
+  },
+  "homepage": "https://github.com/danielng19971/HomeLoanCalc#readme",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
