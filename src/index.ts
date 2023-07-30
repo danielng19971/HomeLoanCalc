@@ -1,11 +1,10 @@
 //Import
-const express = require('express');
-require('dotenv').config()
+require('dotenv').config({path:'./env/dev.env'})
+import server from './server'
 
-//declaration
-const PORT_NUMBER = process.env.PORT_NUMBER
-const app = express();
+//PORT 
+const PORT = process.env.PORT_NUMBER||5000
 
-app.listen(PORT_NUMBER,()=>{
-    console.log(`Listening on port: ${PORT_NUMBER}`)
+server.listen(PORT,()=>{
+    console.log(`Listening on port: ${PORT}`)
 })
