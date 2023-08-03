@@ -1,9 +1,10 @@
-import {Party,partyType} from './types'
+import {Party,partyType,DisplayParty} from './types'
 import Schema from './models'
 import firebase from '../../../../config/firebase'
 import {getCurrentTimeStamp} from '../../util/dateTime'
 import Logger from '../../util/logger'
 import {notFound,partyExistErr} from '../../util/errorHandling'
+import moment from 'moment'
 
 const collection = firebase.collection("parties")
 
@@ -26,8 +27,6 @@ const collection = firebase.collection("parties")
          throw partyExistErr(name) 
         }
         await collection.doc(party.id).set(party);
-
-        
     }catch (e:any){
         throw e
     }
@@ -35,17 +34,20 @@ const collection = firebase.collection("parties")
     return party
 
 }
-
-
-const getParty  = async function <Party> (name:string)  {
+const getParty = async (name:string)=>{
+    let party :Party;
     try{
         const collections = await collection.where('name', '=', name).get()
+
         let parties : Array<Party> =[];
+        
         if(collections._size>0){
             collections.forEach((data:any) => {
                 parties.push(data.data())
             });
-            return parties[0];
+            party = parties[0]
+
+            return party;
         }else{
             notFound(`Party ${name} not found`)
         }
@@ -53,9 +55,9 @@ const getParty  = async function <Party> (name:string)  {
     }catch (e:any){ 
         Logger.error(e.message)
     }
+
+
 }
-
-
 const partyExist = async (name:string) =>{
     try {
         return await getParty(name)?true:false
@@ -64,12 +66,18 @@ const partyExist = async (name:string) =>{
     }
     
 }
-
-
-
-
 const generateID = (partyName:string, createDateTime:number)=>{
     return partyName + createDateTime
 }
 
-export {createParty,getParty}
+const formatDisplayParty = <DisplayParty>(party:Party)=>{
+    return {
+        party:party.name,
+        dateCreated:moment(party.dateCreated),
+        dateUpdated:moment(party.dateUpdated),
+        id:party.id,
+        type:party.type
+    }
+}
+
+export {createParty,getParty,formatDisplayParty}

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/danielng19971/HomeLoanCalc#readme",
   "devDependencies": {
+    "@types/module-alias": "^2.0.1",
     "@types/node": "^20.4.5",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
@@ -30,6 +31,9 @@
     "express": "^4.18.2",
     "firebase-admin": "^11.10.1",
     "log4js": "^6.9.1",
+    "module-alias": "^2.2.3",
+    "moment": "^2.29.4",
     "zod": "^3.21.4"
   }
+  
 }

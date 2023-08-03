@@ -6,7 +6,7 @@ const Schema = z.object({
     dateCreated:z.number(),
     dateUpdated:z.number(),
     id:z.string(),
-    type:z.nativeEnum(partyType)
+    type:z.nativeEnum(partyType),
 })
 
 export default Schema
