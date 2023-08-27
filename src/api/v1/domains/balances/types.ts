@@ -13,3 +13,8 @@ export enum accountType{
     OFFSET="offset",
     LOAN="loan"
 }
+
+export interface EditParams {
+    party:string,
+    amount:number
+}

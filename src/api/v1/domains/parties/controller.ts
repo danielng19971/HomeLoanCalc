@@ -1,15 +1,13 @@
-import {Party,partyType,DisplayParty} from './types'
-import Schema from './models'
+import {Party,partyType} from './types'
 import firebase from '../../../../config/firebase'
-import {getCurrentTimeStamp} from '../../util/dateTime'
-import Logger from '../../util/logger'
+import {DateTime} from '../../util/index'
 import {notFound,partyExistErr} from '../../util/errorHandling'
 import moment from 'moment'
 
 const collection = firebase.collection("parties")
 
  const createParty = async(name:string, type:partyType)=>{
-    const currDate = getCurrentTimeStamp()
+    const currDate = DateTime.getCurrentTimeStamp()
     const party:Party = {
         name,
         dateCreated : currDate,
@@ -53,7 +51,7 @@ const getParty = async (name:string)=>{
         }
         
     }catch (e:any){ 
-        Logger.error(e.message)
+        throw e
     }
 
 
@@ -80,4 +78,4 @@ const formatDisplayParty = <DisplayParty>(party:Party)=>{
     }
 }
 
-export {createParty,getParty,formatDisplayParty}
+export {createParty,getParty,formatDisplayParty,partyExist}

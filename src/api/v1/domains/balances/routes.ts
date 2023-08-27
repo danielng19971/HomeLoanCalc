@@ -1,5 +1,5 @@
-import {getBalance,getDisplayBalance,addToBalance,addToBalanceValidation,getDisplayBalanceFormat} from './controller'
-import {Balance,accountType} from './types'
+import {getDisplayBalance,addToBalance,addToBalanceValidation,getDisplayBalanceFormat,handleEditBalance} from './controller'
+import {Balance,EditParams} from './types'
 import {handleMissingQueryParams} from '../../util/errorHandling'
 import {Error} from '../../util/types'
 
@@ -12,12 +12,21 @@ router.post('/',async(req:Request,res:Response)=>{
     try{
         const reqParam = addToBalanceValidation(req)
         const balance = await addToBalance(reqParam.party,reqParam.amount,reqParam.accountType)
-        res.send(getDisplayBalanceFormat(balance as Balance))
+        //res.send(getDisplayBalanceFormat(balance as Balance))
+        res.send(balance)
     }catch(e:any){
         res.status(e.errorCode).send(e)
     }
 })
 
+router.put('/:party',async (req:Request,res:Response)=>{
+    try{
+        const balance = await handleEditBalance(req)
+        res.send(balance)
+    }catch(e:any){
+        res.status(e.errorCode).send(e)
+    }
+})
 
 // GET: getBalance
 router.get('/',async(req:Request,res:Response)=>{
@@ -30,6 +39,8 @@ router.get('/',async(req:Request,res:Response)=>{
         res.status(e.errorCode).send(e)
     }
 })
+
+
 
 
 
